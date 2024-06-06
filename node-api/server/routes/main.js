@@ -1,28 +1,58 @@
+// const express = require('express');
+// const router = express.Router();
+// const postSchema = require('../models/post');
+
+// // const users = require('../models/user');
+
+// //Routes
+// router.get('', (req, res) => {
+//   res.send('Hello World');
+// });
+
+// router.post('/createpost', async (req, res) => {
+//   try {
+//     const { author, title, description } = req.body;
+//     const newPost = new Post({
+//       author, // Use 'author' instead of 'userName'
+//       title,
+//       description,
+//     });
+
+//     const savedPost = await newPost.save();
+//     res.status(201).json({
+//       message: 'Your post has been saved to the database',
+//       data: savedPost,
+//     });
+//   } catch (error) {
+//     console.log(`Error storing Database: ${error}`);
+//     res.status(500).send({ message: 'Error storing Database', error });
+//   }
+// });
+
+// module.exports = router;
+
 const express = require('express');
 const router = express.Router();
-const model = require('../models/post');
-// const users = require('../models/user');
+const Post = require('../models/post');
 
 //Routes
 router.get('', (req, res) => {
   res.send('Hello World');
 });
 
-router.post('/api/post', async (req, res) => {
+router.post('/createpost', async (req, res) => {
   try {
     const { author, title, description } = req.body;
+    const newPost = new Post({
+      author, // Use 'author' instead of 'userName'
+      title,
+      description,
+    });
 
-    const newPost = {
-      userName: author,
-      title: title,
-      description: description,
-    };
-
-    const insertdata = await model.insertMany([newPost]);
-
+    const savedPost = await newPost.save();
     res.status(201).json({
-      message: 'Your database has been stored on mongo',
-      data: insertdata,
+      message: 'Your post has been saved to the database',
+      data: savedPost,
     });
   } catch (error) {
     console.log(`Error storing Database: ${error}`);

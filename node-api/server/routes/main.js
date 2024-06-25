@@ -33,12 +33,17 @@
 
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/post');
+const postModel = require('../models/post');
 
 //Routes
 router.get('', (req, res) => {
   res.send('Hello World');
 });
+router.get('/posts', (req, res)=>{
+  postModel.find()
+  .then(users => res.json(users))
+  .catch(err => console.log(err))
+})
 
 router.post('/createpost', async (req, res) => {
   try {

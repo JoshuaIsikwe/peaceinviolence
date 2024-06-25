@@ -12,7 +12,7 @@ const Navbar = () => {
           Peace in Violence
         </h1>
       </div>
-
+      
       <div>
         <input
           type='search'
